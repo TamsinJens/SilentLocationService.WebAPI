@@ -1,0 +1,148 @@
+﻿@using SilentLocationService.WebAPI.ViewModels
+@model LocationDetailVM
+
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        margin-right: 10%
+    }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+    .list-group-item {
+        margin-top: 0.3%
+    }
+
+    i {
+        width: 40%;
+        float: right;
+        margin-right: 17%
+    }
+
+    h1 {
+        text-align: center;
+        font-weight: bold;
+        text-shadow: 5px 0 0 #000, 0 -5px 0 #000, 0 5px 0 #000, -5px 0 0 #000;
+        color: white;
+    }
+</style>
+
+<a asp-controller="Locations" asp-action="Index" class="btn btn-primary" style="float: left">&#129044;</a>
+
+<h1>
+    Location Details
+</h1>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+    </div>
+    <div class="panel-body" style="padding: 1%">
+        <h2 style="text-align: center;font-weight:bold;" class="list-group-item">@Model.LocationDetail.name</h2>
+        <ul class="list-group" style="list-style-type:none">
+            <li class="list-group-item"><b>Coördinates: </b> <i>@(Model.LocationDetail.coordinates)</i></li>
+            <li class="list-group-item"><b>Description: </b> <i>@(Model.LocationDetail.description)</i></li>
+            <li class="list-group-item" style="background-color: @(Model.LocationDetail.backgroundColor);color: @(Model.LocationDetail.backgroundColor == "white" || Model.LocationDetail.backgroundColor == "" ? "black" : "white");"><b>Color: </b> <i>@(Model.LocationDetail.backgroundColor)</i></li>
+            <li class="list-group-item" style="font-size: medium; margin-bottom: 0%">
+                <b>Turn on:</b>
+                <label class="switch" style="float: right; margin-right: 4%">
+                    <a asp-controller="Locations" asp-action="ToggleTurnedOnDetail" asp-route-id="@Model.LocationDetail.id" asp-route-val="@Model.LocationDetail.turnedOn" class="switch">
+                        <input disabled type="checkbox" data-toggle="toggle" @(Model.LocationDetail.turnedOn ? "checked" : "") />
+                        <span class="slider round"></span>
+                    </a>
+                </label>
+            </li>
+            <li class="list-group-item" style="font-size: large; margin-bottom: 0%; text-align: center"><b>When at location:</b></li>
+            <li class="list-group-item" style="margin:0%;">
+                <b>Phone on silent? </b>
+                <label class="switch" style="float: right; margin-right: 4%">
+                    <a asp-controller="Locations" asp-action="ToggleSilent" asp-route-id="@Model.LocationDetail.id" asp-route-val="@Model.LocationDetail.silent" class="switch">
+
+                        <input disabled type="checkbox" data-toggle="toggle" @(Model.LocationDetail.silent ? "checked" : "") />
+                        <span class="slider round"></span>
+                    </a>
+                </label>
+            </li>
+            <li class="list-group-item" style="margin:0%;">
+                <b>Phone on vibrate? </b>
+                <label class="switch" style="float: right; margin-right: 4%">
+                    <a asp-controller="Locations" asp-action="ToggleVibrate" asp-route-id="@Model.LocationDetail.id" asp-route-val="@Model.LocationDetail.vibrate" class="switch">
+                        <input disabled type="checkbox" data-toggle="toggle" @(Model.LocationDetail.vibrate ? "checked" : "") />
+                        <span class="slider round"></span>
+                    </a>
+                </label>
+            </li>
+            <li class="list-group-item" style="margin-top: 0%">
+                <b>Bluetooth off? </b>
+                <label class="switch" style="float: right; margin-right: 4%">
+                    <a asp-controller="Locations" asp-action="ToggleBluetoothOff" asp-route-id="@Model.LocationDetail.id" asp-route-val="@Model.LocationDetail.bluetoothOff" class="switch">
+                        <input disabled type="checkbox" data-toggle="toggle" @(Model.LocationDetail.bluetoothOff ? "checked" : "") />
+                        <span class="slider round"></span>
+                    </a>
+                </label>
+            </li>
+
+        </ul>
+        <div class="list-group-item" style="margin-top: 1%; text-align: center">
+            <a asp-controller="Locations" asp-action="Edit" asp-route-id="@Model.LocationDetail.id" class="btn btn-warning">&#x270D;</a>
+            <a asp-controller="Locations" asp-action="Delete" asp-route-id="@Model.LocationDetail.id" class="btn btn-danger">🗑</a>
+        </div>
+    </div>
+    <br />
+    <div class="panel-footer">
+    </div>
+</div>

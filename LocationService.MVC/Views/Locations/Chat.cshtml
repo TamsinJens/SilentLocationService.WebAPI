@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <!DOCTYPEhtml>
+        <style>
+            #messageBody li {
+                max-width: 90%;
+                min-width: 50.1%;
+                background-color: cornflowerblue; 
+                color: white;
+                margin-bottom: 2%;
+                float: right;
+                margin-right: 5%;
+                border-radius: 6px;
+                padding: 2%;
+                overflow: hidden;
+            }
+
+            h1 {
+                text-align: center;
+                font-weight: bold;
+                text-shadow: 3px 0 0 #000, 0 -3px 0 #000, 0 3px 0 #000, -3px 0 0 #000;
+                color: white;
+            }
+
+            #wrapper{
+                width: 70%;
+                display: flex;
+            }
+
+        </style>
+        <html>
+        <head>
+            <metacharset ="utf-8" />
+            <title>chat</title>
+        </head>
+        <body>
+            <div style="margin-left: 20%">
+                <div class="row" style="text-align: center; margin-left: 0.1%;">
+                    <div style="">
+                        <h1>Assistance Chat</h1>
+                        <i>Our developers love to help you out!</i>
+                    </div>
+                </div>
+                <br/>
+                <div class="row list-group-item" id="messageBody" style="width: 80%;height: 28vw;overflow-y: scroll;padding-top: 3%;">
+                    <div>
+                        <ul id="messagesList" style="list-style: none"></ul>
+                    </div>
+                </div>
+
+                <div id="wrapper">
+                    <form>
+                        <div class="form-group list-group-item" style="width: 50%; float: left;">
+                            <label>Username:</label>
+                            <div>
+                                <input type="text" id="userInput" class="form-control alert-success" required="required" />
+                            </div>
+                        </div>
+                        <div class="form-group list-group-item" style="width: 50%; float: left">
+                            <label>Message:</label>
+                            <div>
+                                <input type="text" id="messageInput" class="form-control alert-info" required="required" />
+                            </div>
+                            </div>
+                            <div>
+                                <input type="button" id="sendButton" value="&#10147;" class="btn btn-primary" style="width: 20%; float: right;font-size: large;"/>
+                            </div>
+                    </form>
+                </div>
+                </div>
+            <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+            <script src="~/js/chat.js"></script>
+            <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+        </body>
+    </html>
